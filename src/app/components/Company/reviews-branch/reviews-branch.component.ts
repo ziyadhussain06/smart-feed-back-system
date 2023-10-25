@@ -40,4 +40,47 @@ export class ReviewsBranchComponent implements OnInit {
       }
     );
   }
+  //delete question
+  CompanyId :any;
+deletereview(CompanyId: number) {
+    if(localStorage.getItem('CompanyId')){
+      this.branchId = localStorage.getItem('CompanyId');
+    }
+    this.authservice.deleteonereview(CompanyId)
+      .subscribe(
+        () => {
+          console.log(CompanyId)
+          console.log('delete Question successfully');
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+          // Success message or update the UI as needed
+        },
+        error => {
+          console.log(CompanyId)
+          console.error('Error deleting Question:', error);
+          // Handle error
+        }
+      );
+  }
+
+
+  companylist: any;
+  //get company on form
+  reviewview(companyId: string){
+    const companyID = localStorage.getItem('companyId');
+    if(companyID){
+    this.authservice.getreviewview(companyId)
+    .subscribe(
+      (data:any) => {
+
+        this.companylist=data; 
+        console.log(this.companylist)
+        
+      },
+      error => {
+        console.error('Error fetching brancheslist:', error);
+      }
+    );
+}}
 }

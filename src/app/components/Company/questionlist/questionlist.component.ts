@@ -37,4 +37,48 @@ export class QuestionlistComponent {
     );
   }
 }
+//delete question
+companyId!:any ;
+deleteQuestion(companyId: number) {
+    if(localStorage.getItem('companyId')){
+      this.companyId = localStorage.getItem('companyId');
+    }
+    this.authservice.deleteoneQuestion(companyId)
+      .subscribe(
+        () => {
+          console.log(companyId)
+          console.log('delete Question successfully');
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+          // Success message or update the UI as needed
+        },
+        error => {
+          console.error('Error deleting Question:', error);
+          // Handle error
+        }
+      );
+  }
+
+
+
+
+  companylist: any;
+  //get company on form
+  questionview(companyId: string){
+    const companyID = localStorage.getItem('companyId');
+    if(companyID){
+    this.authservice.getquestionview(companyId)
+    .subscribe(
+      (data:any) => {
+
+        this.companylist=data; 
+        console.log(this.companylist)
+        
+      },
+      error => {
+        console.error('Error fetching brancheslist:', error);
+      }
+    );
+}}
 }

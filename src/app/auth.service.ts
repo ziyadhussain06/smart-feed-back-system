@@ -56,8 +56,8 @@ export class AuthService {
   }
   //branches list company
   private apiUrl3 = 'http://109.123.241.127:3000/company/';
-  getAllbrancheslist(id: string): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl3+id);
+  getAllbrancheslist(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl3);
   }
 
   private apiUrl4 = 'http://109.123.241.127:3000/company/1'; // Replace with your API endpoint
@@ -98,4 +98,46 @@ export class AuthService {
    deleteCompany(id: number): Observable<any> {
      return this.http.delete(this.apiUrl9+id);
    }
+   
+   //delete question
+   private apiUrl12 = 'http://109.123.241.127:3000/question/'; // Replace with your API endpoint
+   deleteoneQuestion(id: number): Observable<any> {
+     return this.http.delete(this.apiUrl12+id);
+   }
+   //delete branch
+   private apiUrl13 = 'http://109.123.241.127:3000/company/'; // Replace with your API endpoint
+   deleteonebranch(id: number): Observable<any> {
+     return this.http.delete(this.apiUrl13+id);
+   }
+   //delete review
+   private apiUrl14 = 'http://109.123.241.127:3000/review/'; // Replace with your API endpoint
+   deleteonereview(id: number): Observable<any> {
+     return this.http.delete(this.apiUrl14+id);
+   }
+
+//all company admin
+private apiUrls15 = 'http://109.123.241.127:3000/company/';
+getCompanyview(id:string): Observable<any[]> {
+  return this.http.get<any[]>(this.apiUrls15+id);
+}
+
+//all company admin
+private apiUrls16 = 'http://109.123.241.127:3000/question/';
+getquestionview(id:string): Observable<any[]> {
+  return this.http.get<any[]>(this.apiUrls16+id);
+}
+
+//all company admin
+private apiUrls17 = 'http://109.123.241.127:3000/review/branch/';
+getreviewview(id:string): Observable<any[]> {
+  return this.http.get<any[]>(this.apiUrls17+id);
+}
+
+//all company admin
+private apiUrls18 = 'http://109.123.241.127:3000/branch/';
+getbranchview(id:string): Observable<any[]> {
+  return this.http.get<any[]>(this.apiUrls18+id);
+}
+
+
 }

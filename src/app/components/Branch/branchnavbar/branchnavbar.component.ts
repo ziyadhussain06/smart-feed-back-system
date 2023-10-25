@@ -19,4 +19,5 @@ export class BranchnavbarComponent {
   ngOnInit() {
     this.username = localStorage.getItem('username');
   }
+  
 }

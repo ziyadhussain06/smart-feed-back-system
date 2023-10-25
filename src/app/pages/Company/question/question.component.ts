@@ -37,7 +37,7 @@ export class QuestionComponent {
         this.myForm.resetForm();
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 500);
       
       },
       (error) => {

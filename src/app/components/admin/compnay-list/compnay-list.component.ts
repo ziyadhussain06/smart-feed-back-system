@@ -7,7 +7,7 @@ import { AuthService} from 'src/app/auth.service';
 })
 export class CompnayListComponent {
   @ViewChild('modaal') modaal!: ElementRef;
-
+ 
   openModaal() {
     const modalElement = this.modaal.nativeElement;
     modalElement.classList.add('show', 'd-block');
@@ -23,12 +23,9 @@ export class CompnayListComponent {
 
   ngOnInit() {
     this.authservice.getAllCompanies().subscribe(
-    
       data => {
-    
         this.companies = data;
         console.log(this.companies)
-        debugger
       },
       // error => {
       //   console.error('Error fetching companies:', error);
@@ -36,6 +33,8 @@ export class CompnayListComponent {
     );
   }
   companyId!:any ;
+  
+
   deleteCompany(companyId: number) {
     if(localStorage.getItem('companyId')){
       this.companyId = localStorage.getItem('companyId');
@@ -43,7 +42,8 @@ export class CompnayListComponent {
     this.authservice.deleteCompany(companyId)
       .subscribe(
         () => {
-          console.log(companyId)
+          // console.log(companyId)
+          
           console.log('delete company successfully');
           setTimeout(() => {
             window.location.reload();
@@ -56,5 +56,24 @@ export class CompnayListComponent {
         }
       );
   }
+  
+  companylist: any;
+  //get company on form
+  viewform(companyId: string){
+    const companyID = localStorage.getItem('companyId');
+    if(companyID){
+    this.authservice.getCompanyview(companyId)
+    .subscribe(
+      (data:any) => {
+
+        this.companylist=data; 
+        console.log(this.companylist)
+        
+      },
+      error => {
+        console.error('Error fetching brancheslist:', error);
+      }
+    );
+}}
 }
 
