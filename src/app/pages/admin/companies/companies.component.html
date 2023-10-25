@@ -1,0 +1,19 @@
+<div>
+  <app-side-nav [menuId]="3"></app-side-nav>
+  <div class="lg:pl-60 ">
+    <app-navbar></app-navbar>
+    <div class="border-b py-3 px-4 flex justify-between">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">All Companies</h2>
+      <button (click)="openModal()" type="button"
+                        class="inline-flex items-center gap-x-1.5 rounded-md bg-white border  px-2.5 py-1.5 text-sm font-semibold text-indego-900 shadow-sm ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5V19M5 12H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        Add Company
+                    </button>
+    </div>
+    <app-compnay-list></app-compnay-list>
+    <app-new-company-modal [isOpen]="isModalOpen()" (closeModalEvent)="closeModal()"></app-new-company-modal>
+        
+    </div>
+  </div>
