@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToggleService } from '../../toggle.service'
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
@@ -17,22 +17,6 @@ export class SigninComponent {
   }
   username: string = '';
   password: string = '';
-
-  // login() {
-  //   this.authService.login(this.username, this.password).subscribe(
-  //     (response) => {
-  //       localStorage.setItem('access_token', response.access_token);
-  //       console.log(response);
-  //       console.log(this.username);
-  //       console.log=(response.access_token);
-  //         this.router.navigate(['/AdminDashboard']);
-  //     },
-  //     (error) => {
-  //       console.error('Login failed:', error);
-  //       alert('Invalid credentials. Please try again.');
-  //     }
-  //   );
-// }
 login() {
   this.authService.login(this.username, this.password).subscribe(
     (response: any) => {
@@ -65,4 +49,5 @@ login() {
     }
   );
 }
+
 }

@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
 import { ModalService } from '../../../modal.service';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -60,5 +62,20 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
   
+
+
+  @ViewChild('table')
+  table!: ElementRef;
+
+exportTableToPDF() {
+  const data = this.table.nativeElement;
+  html2canvas(data).then(canvas => {
+    const contentDataURL = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait, millimeters, A4 size
+    pdf.addImage(contentDataURL, 'PNG', 10, 10, 190, 0);
+    pdf.save('table.pdf');
+  });
+}
+
   }
 

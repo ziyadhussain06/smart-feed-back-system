@@ -1,5 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService} from 'src/app/auth.service';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import { ModalService } from 'src/app/modal.service';
 @Component({
   selector: 'app-compnay-list',
   templateUrl: './compnay-list.component.html',
@@ -19,7 +22,7 @@ export class CompnayListComponent {
   }
   companies: any[] | undefined;
 
-  constructor(private authservice: AuthService) {}
+  constructor(private authservice: AuthService ,private modalService: ModalService) {}
 
   ngOnInit() {
     this.authservice.getAllCompanies().subscribe(
@@ -59,21 +62,47 @@ export class CompnayListComponent {
   
   companylist: any;
   //get company on form
-  viewform(companyId: string){
-    const companyID = localStorage.getItem('companyId');
-    if(companyID){
+  viewforms(companyId: string) {
+    
     this.authservice.getCompanyview(companyId)
     .subscribe(
       (data:any) => {
-
+        console.log(this.companyId)
         this.companylist=data; 
         console.log(this.companylist)
+        
         
       },
       error => {
         console.error('Error fetching brancheslist:', error);
       }
     );
-}}
+}
+
+
+  @ViewChild('table')
+  table!: ElementRef;
+
+exportTableToPDF() {
+  const data = this.table.nativeElement;
+  html2canvas(data).then(canvas => {
+    const contentDataURL = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait, millimeters, A4 size
+    pdf.addImage(contentDataURL, 'PNG', 10, 10, 190, 0);
+    pdf.save('table.pdf');
+  });
+}
+
+
+
+openModal() {
+  this.modalService.openModal();
+}
+closeModal() {
+  this.modalService.closeModal();
+}
+isModalOpen() {
+  return this.modalService.getIsOpen();
+}
 }
 

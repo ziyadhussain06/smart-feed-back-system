@@ -1,55 +1,62 @@
-<table class="w-full text-left divide-y divide-gray-300 ">
+<div class="py-3 px-4 ">
+    <div class="flex justify-between border-b my-3 py-4 px-4">
+    <h2 class="text-base font-semibold leading-7 text-gray-900">All Companies</h2>
+    <div class="flex ">
+        <button (click)="openModal()" type="button"
+                        class="mr-3  inline-flex items-center gap-x-1.5 rounded-md bg-white border  px-2.5 py-1.5 text-sm font-semibold text-indego-900 shadow-sm ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5V19M5 12H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        Add Company
+                    </button>
+        <button (click)="exportTableToPDF()" class=" inline-flex items-center gap-x-1.5 rounded-md bg-white border  px-2.5 py-1.5 text-sm font-semibold text-indego-900 shadow-sm ">Export Table to PDF</button>
+    
+                </div>
+</div>
+</div>
+<table class="w-full text-left divide-y divide-gray-300 " #table >
     <thead class="bg-[#F9FAFB]">
         <tr class="">
-            <th scope="col"
-                class="py-3.5 pl-4 pr-3 text-left md:text-sm font-12 font-semibold text-[#475467] sm:pl-6 ">
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left md:text-sm font-12 font-semibold text-[#475467] sm:pl-6 ">
                 Check</th>
-            <th scope="col"
-                class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell ">
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell ">
                 ID</th>
-            
-            <th scope="col"
-                class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
+
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
                 Companies </th>
-            <th scope="col"
-                class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
                 Description </th>
-                
-                
-             <th scope="col"
+
+
+            <th scope="col"
                 class="px-3 py-3.5 text-left md:text-sm font-12 font-semibold text-[#475467]  md:table-cell">
                 Postive </th>
-            <th scope="col"
-                class="px-3 py-3.5 text-left md:text-sm font-12 font-semibold text-[#475467]">
+            <th scope="col" class="px-3 py-3.5 text-left md:text-sm font-12 font-semibold text-[#475467]">
                 Negative</th>
-                <th scope="col"
-                class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
-                Average 
-            </th> 
-            <th scope="col"
-                class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
-                Action 
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
+                Average
             </th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-[#475467] hidden md:table-cell">
+                Action
+            </th>
+            
         </tr>
     </thead>
     <tbody class="divide-y divide-gray-200 bg-white ">
-        <tr  *ngFor="let company of companies">
+        <tr *ngFor="let company of companies">
             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox"
+                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
             </td>
-            <td
-                class="whitespace-nowrap px-3 py-4 text-sm text-[#101828] font-medium hidden md:table-cell">
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#101828] font-medium hidden md:table-cell">
                 {{ company.id }}</td>
-            <td
-                class="whitespace-nowrap px-3 py-4 text-sm text-[#475467] hidden md:table-cell">
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#475467] hidden md:table-cell">
                 {{ company.name }}</td>
-            <td
-                class="whitespace-nowrap px-3 py-4 text-sm text-[#475467] hidden md:table-cell">
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#475467] hidden md:table-cell">
                 {{ company.description}}</td>
-                
-               
-             <td
-                class="whitespace-nowrap px-3 py-4 text-sm text-[#475467] hidden md:table-cell">
+
+
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-[#475467] hidden md:table-cell">
                 {{ company.analysis.positive_review_count}}</td>
 
             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -59,11 +66,14 @@
                 {{ company.analysis.average_review_count}}
             </td>
 
-            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-6 hidden md:table-cell">
+            <td
+                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-6 hidden md:table-cell">
                 <div class="space-x-4 flex">
-                    <img (click)="openModaal()" (click)="viewform(company.id)" class="eye" src="../../../assets/images/eye.svg"/>
-                    <img src="../../../assets/images/Check.svg" class="cursor-pointer"/>
-                    <img src="../../../assets/images/x.svg" class="cursor-pointer" (click)="deleteCompany(company.id)"/>
+                    <img (click)="openModaal()" (click)="viewforms(company.id)" class="eye"
+                        src="../../../assets/images/eye.svg" />
+                    <img src="../../../assets/images/Check.svg" class="cursor-pointer" />
+                    <img src="../../../assets/images/x.svg" class="cursor-pointer"
+                        (click)="deleteCompany(company.id)" />
                 </div>
             </td>
         </tr>
@@ -73,174 +83,107 @@
 
 <!--company profile-->
 <div #modaal class="relative z-50 hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-  <!-- Background backdrop, show/hide based on slide-over state. -->
-  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-  <div class="fixed inset-0 overflow-hidden">
-      <div class="absolute inset-0 overflow-hidden">
-          <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
-              <div class="pointer-events-auto w-screen max-w-3xl ">
-                  <div class="flex h-full flex-col overflow-y-scroll bg-white md:py-0  md:px-14 shadow-xl " *ngIf="companylist">
-                      <div
-                          class="md:py-8 md:px-0 px-4 py-4  md:shadow-none shadow-[0_0_16px_0_rgba(38,38,38,0.08)] ;">
-                          <div class="flex items-start justify-between">
-                              <div class="flex ">
-                                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company">
-                                  <h2 class="md:text-xl text-base  my-auto ml-4 font-semibold leading-6 text-gray-900"
-                                      id="slide-over-title">{{companylist.name}}</h2>
-                              </div>
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+                <div class="pointer-events-auto w-screen max-w-3xl ">
+                    <div class="flex h-full flex-col overflow-y-scroll bg-white md:py-0  md:px-14 shadow-xl "
+                        >
+                        <div class="md:py-8 md:px-0 px-4 py-4  md:shadow-none shadow-[0_0_16px_0_rgba(38,38,38,0.08)] ;">
+                            <div class="flex items-start justify-between">
+                                <div class="flex ">
+                                    <img class="h-8 w-auto"
+                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                                        alt="Your Company">
+                                    <h2 class="md:text-xl text-base  my-auto ml-4 font-semibold leading-6 text-gray-900"
+                                        id="slide-over-title"></h2>
+                                </div>
 
-                              <div class="ml-3 flex h-7 items-center my-auto">
-                                  <button type="button" (click)="closeModaal()"
-                                      class="relative rounded-md bg-white text-gray-400 \ ">
-                                      <span class="absolute -inset-2.5"></span>
-                                      <span class="sr-only">Close panel</span>
-                                      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                          stroke="currentColor" aria-hidden="true">
-                                          <path stroke-linecap="round" stroke-linejoin="round"
-                                              d="M6 18L18 6M6 6l12 12" />
-                                      </svg>
-                                  </button>
-                              </div>
-                          </div>
-                      </div>
+                                <div class="ml-3 flex h-7 items-center my-auto">
+                                    <button type="button" (click)="closeModaal()"
+                                        class="relative rounded-md bg-white text-gray-400 \ ">
+                                        <span class="absolute -inset-2.5"></span>
+                                        <span class="sr-only">Close panel</span>
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-                      <!-- <div class="relative md:px-0 px-4 ">
-                          <div class="md:border-[1px] md:border-[#ECEEF2] rounded-xl md:py-6 md:px-8">
-                              <div class="flex justify-between">
-                                  <h2 class="md:text-xl text-base  my-auto  font-semibold leading-6 text-gray-900" id="slide-over-title">Reviews</h2>
-                                      <div class="flex">
-                                          <span
-                                              class="inline-flex flex-shrink-0 items-center rounded-lg bg-[white] px-2 py-0.5 text-xs font-medium text-[#344054] ring-1 ring-inset ring-green-600/20 mr-1">
-                                              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
-                                                  viewBox="0 0 8 8" fill="none">
-                                                  <circle cx="4" cy="4" r="3" fill="#197C3B" />
-                                              </svg>
-                                              <span class="pl-2 py-0.5 text-xs font-medium">Positive </span>
-                                          </span>
-                                          <span
-                                              class="inline-flex flex-shrink-0 items-center rounded-lg bg-[white] px-2 py-0.5 text-xs font-medium text-[#344054] ring-1 ring-inset ring-green-600/20 mr-1">
-                                              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
-                                                  viewBox="0 0 8 8" fill="none">
-                                                  <circle cx="4" cy="4" r="3" fill="#FF0000" />
-                                              </svg>
-                                              <span class="pl-2 py-0.5 text-xs font-medium">Negative </span>
-                                          </span>
-                                          <span
-                                              class="inline-flex flex-shrink-0 items-center rounded-lg bg-[white] px-2 py-0.5 text-xs font-medium text-[#344054] ring-1 ring-inset ring-green-600/20 mr-1">
-                                              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
-                                                  viewBox="0 0 8 8" fill="none">
-                                                  <circle cx="4" cy="4" r="3" fill="#FFFF00" />
-                                              </svg>
-                                              <span class="pl-2 py-0.5 text-xs font-medium">Average </span>
-                                          </span>
-                                      </div>
-                              </div>
+                        <div class="py-4 md:px-0 px-4">
+                            <div class="md:border-[1px] md:border-[#ECEEF2] rounded-xl md:py-6 md:px-8">
+                                <h2 class="md:text-xl text-base  my-auto  font-semibold leading-6 text-gray-900" id="slide-over-title">Company Detail</h2>
+                                <div class="border-b-[0.5px]  col-span-full  md:block hidden pb-4"></div>
+                                <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6" *ngIf="companylist">
+                                    <div class="sm:col-span-full">
+                                        <label for="first-name"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Company
+                                            Id</label>
+                                        <div class="relative mt-2 rounded-md shadow-sm">
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
 
-                               <div class="border-b-[0.5px]   col-span-full  md:block hidden pb-4"></div>
-                              <ul role="list" class="grid grid-cols-1 gap-6 grid-cols-3 py-4">
-                                  <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white ">
-                                      <div class="w-full p-3 bg-[#F0FDF4] rounded-lg">
-                                          <h3 class="truncate text-sm font-medium text-gray-900">Positive Reviews</h3>
-                                          <div class="flex  justify-between">
-                                              <h2 class="mt-1 truncate text-xl text-gray-700 font-bold">243566</h2>
+                                            </div>
 
-                                          </div>
-                                      </div>
-                                  </li>
-                                  <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white ">
-                                      <div class="w-full p-3 bg-[#F0FDF4] rounded-lg">
-                                          <h3 class="truncate text-sm font-medium text-gray-900">Negative Reviews</h3>
-                                          <div class="flex  justify-between">
-                                              <h2 class="mt-1 truncate text-xl text-gray-700 font-bold">3453</h2>
-
-                                          </div>
-                                      </div>
-                                  </li>
-                                  <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white ">
-                                      <div class="w-full p-3 bg-[#F0FDF4] rounded-lg">
-                                          <h3 class="truncate text-sm font-medium text-gray-900">Average Reviews</h3>
-                                          <div class="flex  justify-between">
-                                              <h2 class="mt-1 truncate text-xl text-gray-700 font-bold">34554546</h2>
-                                          </div>
-                                      </div>
-                                  </li>
-                              </ul>
-                          </div> 
-                      </div> -->
-                      
-                      <div class="py-4 md:px-0 px-4">
-                          <div class="md:border-[1px] md:border-[#ECEEF2] rounded-xl md:py-6 md:px-8" 
-                          >
-                              <h2 class="md:text-xl text-base  my-auto  font-semibold leading-6 text-gray-900"
-                                  id="slide-over-title">Company Detail</h2>
-                              <div class="border-b-[0.5px]  col-span-full  md:block hidden pb-4"></div>
-                              <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6" >
-                                <div class="sm:col-span-full">
-                                    <label for="first-name"
-                                        class="block text-sm font-medium leading-6 text-gray-900">Company
-                                        Id</label>
-                                    <div class="relative mt-2 rounded-md shadow-sm">
-                                        <div
-                                            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                           
+                                            <input type="text" name="first-name" id="first-name"
+                                                autocomplete="given-name"
+                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                [(ngModel)]="companylist.id" [disabled]="true">
                                         </div>
-                                        
-                                        <input type="text"  name="first-name" id="first-name"
-                                            autocomplete="given-name"
-                                            class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" [(ngModel)]="companylist.id" [disabled]="true"
-                                            >
-                                            
-
                                     </div>
-                                </div>  
-                                <div class="sm:col-span-full">
-                                      <label for="first-name"
-                                          class="block text-sm font-medium leading-6 text-gray-900">Company
-                                          name</label>
-                                      <div class="relative mt-2 rounded-md shadow-sm">
-                                          <div
-                                              class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                             
-                                          </div>
-                                          
-                                          <input type="text"  name="first-name" id="first-name"
-                                              autocomplete="given-name"
-                                              class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" [(ngModel)]="companylist.name" [disabled]="true"
-                                              >
-                                              
+                                    <div class="sm:col-span-full">
+                                        <label for="first-name"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Company
+                                            name</label>
+                                        <div class="relative mt-2 rounded-md shadow-sm">
+                                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+                                            <input type="text" name="first-name" id="first-name"
+                                                autocomplete="given-name"
+                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                [(ngModel)]="companylist.name" [disabled]="true">
+                                        </div>
+                                    </div>
 
-                                      </div>
-                                  </div>
-
-                                  <div class="sm:col-span-full">
-                                      <label for="last-name"
-                                          class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-                                      <div class="relative mt-2 rounded-md shadow-sm">
-                                          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                          </div>
-                                          <input type="text" name="last-name" id="last-name"
-                                              autocomplete="family-name"
-                                              class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" [(ngModel)]="companylist.description" [disabled]="true"
-                                              >
-                                              
-                                      </div>
-                                  </div>
-
-                                 
-                              </div>
-                          </div>
-                      </div>
-                      <!-- <div class="md:mt-0 mt-2 flex justify-end">
+                                    <div class="sm:col-span-full">
+                                        <label for="last-name"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                                        <div class="relative mt-2 rounded-md shadow-sm">
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            </div>
+                                            <input type="text" name="last-name" id="last-name"
+                                                autocomplete="family-name"
+                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                [(ngModel)]="companylist.description" [disabled]="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="md:mt-0 mt-2 flex justify-end">
                         <button
                             class="text-sm border bg-[transparent] text-gray-900 md:px-4 md:py-2.5  px-4 py-2.5 rounded-lg font-semibold">Cancel</button>
                         <button
                             class="text-sm bg-[#28BF5B] text-white ml-2 px-4 py-2.5  rounded-lg font-semibold">Submit
                         </button>
                     </div> -->
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Add Company modal-->
+<div class="">
+    <app-new-company-modal [isOpen]="isModalOpen()" (closeModalEvent)="closeModal()"></app-new-company-modal>
 </div>

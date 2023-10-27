@@ -29,9 +29,10 @@ export class SideNavComponent {
     return this.modalService.getIsOpen();
   }
   logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('username');
-    localStorage.removeItem('companyId');
+    localStorage.clear();
+    // localStorage.removeItem('access_token');
+    // localStorage.removeItem('username');
+    // localStorage.removeItem('companyId');
     this.router.navigate(['/signin']); // Navigate to the logout route
   }
 }

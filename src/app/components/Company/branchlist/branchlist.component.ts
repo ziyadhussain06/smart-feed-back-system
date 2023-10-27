@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
-
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-branchlist',
   templateUrl: './branchlist.component.html',
@@ -84,4 +85,17 @@ deletebranch(branchId: number) {
     );
 }}
 
+
+@ViewChild('table')
+  table!: ElementRef;
+
+exportTableToPDF() {
+  const data = this.table.nativeElement;
+  html2canvas(data).then(canvas => {
+    const contentDataURL = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait, millimeters, A4 size
+    pdf.addImage(contentDataURL, 'PNG', 10, 10, 190, 0);
+    pdf.save('table.pdf');
+  });
+}
 }
