@@ -28,7 +28,7 @@ import { BranchnavbarComponent } from './components/Branch/branchnavbar/branchna
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { AuthInterceptor } from './auth.interceptor';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -70,6 +70,8 @@ import { AuthInterceptor } from './auth.interceptor';
     HttpClientModule,
     CompanyModule,
     ReactiveFormsModule,
+    NgChartsModule
+    
     
   ],
   providers: [ 

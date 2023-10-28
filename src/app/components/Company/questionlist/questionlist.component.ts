@@ -67,7 +67,7 @@ deleteQuestion(companyId: number) {
   //get company on form
   questionview(companyId: string){
     const companyID = localStorage.getItem('companyId');
-    if(companyID){
+    
     this.authservice.getquestionview(companyId)
     .subscribe(
       (data:any) => {
@@ -80,5 +80,23 @@ deleteQuestion(companyId: number) {
         console.error('Error fetching brancheslist:', error);
       }
     );
-}}
 }
+
+// updateCompanyData(companyids:string) {
+//   // Replace with the actual id
+
+//   this.authservice.updateData(companyid)
+//   .subscribe(
+//     (data:any) => {
+
+//       console.log(companyids)
+      
+//     },
+//     error => {
+//       console.error('Error fetching brancheslist:', error);
+//     }
+//   );
+// }
+
+}
+

@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ModalService } from 'src/app/modal.service';
 @Component({
   selector: 'app-branchlist',
   templateUrl: './branchlist.component.html',
@@ -21,7 +22,7 @@ export class BranchlistComponent {
   }
   brancheslist: any[] | undefined;
 
-  constructor(private authservice: AuthService) {}
+  constructor(private authservice: AuthService,private modalService: ModalService) {}
   adminId!:string;
   companyId!:any ;
 
@@ -97,5 +98,16 @@ exportTableToPDF() {
     pdf.addImage(contentDataURL, 'PNG', 10, 10, 190, 0);
     pdf.save('table.pdf');
   });
+}
+
+
+openModal() {
+  this.modalService.openModal();
+}
+closeModal() {
+  this.modalService.closeModal();
+}
+isModalOpen() {
+  return this.modalService.getIsOpen();
 }
 }

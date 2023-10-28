@@ -38,7 +38,6 @@
             <td class="relative  py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-6 hidden md:table-cell">
                 <div class="space-x-4 flex">
                     <img (click)="openModal()" (click)="questionview(question.id)" class="eye" src="../../../assets/images/eye.svg"/>
-                    <img src="../../../assets/images/Check.svg" class="cursor-pointer"/>
                     <img src="../../../assets/images/x.svg" (click)="deleteQuestion(question.id)" class="cursor-pointer" />
                 </div>
             </td>
@@ -103,12 +102,14 @@
                       
                       <form >      
                       <div class="py-4 md:px-0 px-4">
-                          <div class="md:border-[1px] md:border-[#ECEEF2] rounded-xl md:py-6 md:px-8">
+                          <div class="md:border-[1px] md:border-[#ECEEF2] rounded-xl md:py-6 md:px-8"  *ngIf="companylist">
                               <h2 class="md:text-xl text-base  my-auto  font-semibold leading-6 text-gray-900"
                                   id="slide-over-title">Question</h2>
                               <div class="border-b-[0.5px]  col-span-full  md:block hidden pb-4"></div>
-                              <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6" *ngIf="companylist">
-                                <div class="sm:col-span-full">
+                              <form  >
+                              <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6">
+                                
+                                <!-- <div class="sm:col-span-full">
                                     <label for="first-name"
                                         class="block text-sm font-medium leading-6 text-gray-900">Question Id</label>
                                     <div class="relative mt-2 rounded-md shadow-sm">
@@ -121,7 +122,7 @@
                                             class="disabled lock w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             [(ngModel)]="companylist.id" [disabled]="true">
                                     </div>
-                                </div>
+                                </div> -->
                                   <div class="sm:col-span-full">
                                       <label for="first-name"
                                           class="block text-sm font-medium leading-6 text-gray-900">Date</label>
@@ -148,19 +149,21 @@
                                           <input type="text" name="last-name" id="last-name"
                                               autocomplete="family-name"
                                               class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                              [(ngModel)]="companylist.text" [disabled]="true">
+                                              [(ngModel)]="companylist.text" [disabled]="true"git >
                                       </div>
                                   </div>
                                     
                               </div>
-                          </div>
-                          <!-- <div class="md:mt-0 mt-2 flex justify-end py-4">
-                            <button
+                              <!-- <div class="md:mt-0 mt-2 flex justify-end py-4">
+                            <button (click)="closeModal()"
                                 class="text-sm border bg-[transparent] text-gray-900 md:px-4 md:py-2.5  px-4 py-2.5 rounded-lg font-semibold">Cancel</button>
-                            <button
+                            <button type="button"
                                 class="text-sm bg-[#28BF5B] text-white ml-2 px-4 py-2.5  rounded-lg font-semibold">Submit
                             </button>
                         </div> -->
+                            </form>
+                          </div>
+                          
                       </div>
                       </form>
                   </div>

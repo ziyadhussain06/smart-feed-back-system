@@ -155,4 +155,18 @@ export class AuthService {
       });
     });
 }
+
+//all company admin
+private apiUrls20 = 'http://109.123.241.127:3000/questions/';
+
+updateData(id: number, updatedData: any) {
+  const url = `${this.apiUrls20}/${id}`;
+  return this.http.put<any[]>(url, updatedData);
+}
+
+
+ private apiUrlSS = 'http://109.123.241.127:3000/questions/';
+  updateCompany(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrlSS}/${id}`, data);
+  }
 }

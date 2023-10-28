@@ -79,6 +79,7 @@ export class CompanyDashboardComponent {
         Response => {
           console.log(Response);
           this.myForm.resetForm();
+          alert("Review submit successfully");
         }
       )
     }
