@@ -88,12 +88,12 @@ deletereview(CompanyId: number) {
   //     }
   //   );
 loadreviewInfo(reviewInfo:number) {
-  
+
   this.authservice.getreview(reviewInfo).subscribe(
     (data) => {
       // console.log(this.reviewInfo)
       
-      this.reviewInfo = data;
+      this.reviewInfo = data[0];
       console.log(this.reviewInfo)
     },
     (error) => {
