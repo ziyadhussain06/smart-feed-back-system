@@ -129,7 +129,7 @@ export class AuthService {
   }
 
   //all company admin
-  private apiUrls17 = 'http://109.123.241.127:3000/review/branch/';
+  private apiUrls17 = 'http://109.123.241.127:3000/review/';
   getreviewview(id: string): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrls17 + id);
   }
@@ -140,8 +140,36 @@ export class AuthService {
     return this.http.get<any[]>(this.apiUrls18 + id);
   }
 
+  //
+  private apiUrlq = 'http://109.123.241.127:3000/question';
+  getCompany(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrlq}/${id}`);
+  }
+  private apiUrlqs = 'http://109.123.241.127:3000/question';
+  updateCompany(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrlqs}/${id}`, data);
+  }
+  private apiUrlb = 'http://109.123.241.127:3000/branch';
+  getbranch(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrlb}/${id}`);
+  }
+  private apiUrlqb = 'http://109.123.241.127:3000/branch';
+  updatebranch(id: number, data: any): Observable<any> {
+    return this.http.patch(`${this.apiUrlqb}/${id}`, data);
+  }
+  private apiUrlc = 'http://109.123.241.127:3000/company';
+  getallcompany(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrlc}/${id}`);
+  }
+  private apiUrlco = 'http://109.123.241.127:3000/company';
+  updateallcompany(id: number, data: any): Observable<any> {
+    return this.http.patch(`${this.apiUrlco}/${id}`, data);
+  }
 
-
+  private apiUrlgr = 'http://109.123.241.127:3000/review';
+  getreview(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrlgr}/${id}`);
+  }
 
 
   generateQRCodeForBranch(branchId: string): Promise<string> {
@@ -156,17 +184,4 @@ export class AuthService {
     });
 }
 
-//all company admin
-private apiUrls20 = 'http://109.123.241.127:3000/questions/';
-
-updateData(id: number, updatedData: any) {
-  const url = `${this.apiUrls20}/${id}`;
-  return this.http.put<any[]>(url, updatedData);
-}
-
-
- private apiUrlSS = 'http://109.123.241.127:3000/questions/';
-  updateCompany(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrlSS}/${id}`, data);
-  }
 }

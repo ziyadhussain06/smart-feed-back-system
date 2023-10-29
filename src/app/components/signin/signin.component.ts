@@ -17,6 +17,7 @@ export class SigninComponent {
   }
   username: string = '';
   password: string = '';
+  branchId!:any;
 login() {
   this.authService.login(this.username, this.password).subscribe(
     (response: any) => {
@@ -29,6 +30,7 @@ login() {
         localStorage.setItem('companyId', response.token.company.id);
       }
       if(response.token.branch){
+        this.branchId=response.token.branch.id;
         localStorage.setItem('branchId', response.token.branch.id);
       }
       
@@ -41,7 +43,7 @@ login() {
       else if(response.token.role === "company-admin"){
       this.router.navigate(['/CompanyDashboard']);}
       else if(response.token.role === "branch-admin"){
-      this.router.navigate(['/BranchDashboard']);}
+      this.router.navigate(['/BranchDashboard/'+this.branchId]);}
     },
     (error) => {
       console.error('Login failed:', error);

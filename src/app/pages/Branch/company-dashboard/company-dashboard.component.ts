@@ -1,6 +1,6 @@
 import { ToggleService } from '../../../toggle.service';
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
 import { ModalService } from 'src/app/modal.service';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +14,8 @@ export class CompanyDashboardComponent {
   [x: string]: any;
   @ViewChild('myForm')
   myForm!: NgForm;
-  constructor(private toggleService: ToggleService, private authService: AuthService, private router: Router, private modalService: ModalService, private http: HttpClient) {
+  branchId!: string;
+  constructor(private toggleService: ToggleService, private authService: AuthService, private router: Router, private modalService: ModalService, private http: HttpClient,private route: ActivatedRoute) {
 
   }
 
@@ -27,22 +28,31 @@ export class CompanyDashboardComponent {
   //   this.router.navigate(['/']);
   // }
   questionList: any[] | undefined;
-
-  ngOnInit() {
-    const companyID = localStorage.getItem('companyId');
-    if (companyID) {
-      this.authService.getAllquestionreviewList(companyID).subscribe(
-        data => {
-          if (data) {
-            this.questionList = data;
-            console.log(this.questionList)
-          }
-        },
-        error => {
-          console.error('Error fetching questionList:', error);
+  companyId!:any;
+  ngOnInit() : void {
+    this.route.params.subscribe(params => {
+      this.branchId = params['branchId'];
+      this.http.get('http://109.123.241.127:3000/branch/'+this.branchId).subscribe((data:any)=>{
+        this.companyId = data.company.id;
+        if (this.companyId) {
+          this.authService.getAllquestionreviewList(this.companyId).subscribe(
+            data => {
+              if (data) {
+                this.questionList = data;
+                console.log(this.questionList)
+              }
+            },
+            error => {
+              console.error('Error fetching questionList:', error);
+            }
+          );
         }
-      );
-    }
+        });
+      
+      // Use this.branchId to fetch user data or perform other actions.
+    });
+    
+    
   }
 
   formData: any = {
@@ -54,17 +64,16 @@ export class CompanyDashboardComponent {
   }
 
   submitReview() {
-    const branchId = localStorage.getItem('branchId');
     let payload: any = {
       ratings: [],
       fullName: this.formData['fullName'],
       email: this.formData.email,
       city: this.formData.city,
       phone: this.formData.phone,
-      branchId: Number(branchId)
+      branchId: Number(this.branchId)
     }
 
-    if (branchId) {
+    if (this.branchId) {
       console.log(this.questionList)
       debugger
       if (this.questionList) {
@@ -84,4 +93,9 @@ export class CompanyDashboardComponent {
       )
     }
   }
+
+  handleQRCodeScan(branchId: string) {
+  
+  this.router.navigate(['BranchDashboard', this.branchId]);
+}
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild , Input, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
@@ -7,21 +7,28 @@ import { AuthService } from 'src/app/auth.service';
   templateUrl: './questionlist.component.html',
   styleUrls: ['./questionlist.component.css']
 })
-export class QuestionlistComponent {
+export class QuestionlistComponent implements OnInit {
   @ViewChild('modal') modal!: ElementRef;
+  questionList: any[] | undefined;
+  selectedCompanyId!: number;
+  @Input() 
+  companyId: any;
+  companyInfo: any = {};
+
+  constructor(private authservice: AuthService) {
+    this.selectedCompanyId = 0;
+  }
 
   openModal() {
     const modalElement = this.modal.nativeElement;
     modalElement.classList.add('show', 'd-block');
   }
-
   closeModal() {
     const modalElement = this.modal.nativeElement;
     modalElement.classList.remove('show', 'd-block');
   }
-  questionList: any[] | undefined;
 
-  constructor(private authservice: AuthService) {}
+ 
 
   ngOnInit() {
     const companyID = localStorage.getItem('companyId');
@@ -36,12 +43,13 @@ export class QuestionlistComponent {
       }
     );
   }
+  // this.loadCompanyInfo();
 }
 //delete question
-companyId!:any ;
+companyIdss!:any ;
 deleteQuestion(companyId: number) {
     if(localStorage.getItem('companyId')){
-      this.companyId = localStorage.getItem('companyId');
+      this.companyIdss = localStorage.getItem('companyId');
     }
     this.authservice.deleteoneQuestion(companyId)
       .subscribe(
@@ -97,6 +105,37 @@ deleteQuestion(companyId: number) {
 //     }
 //   );
 // }
+loadCompanyInfo(companyInfo:number) {
+  this.authservice.getCompany(companyInfo).subscribe(
+    (data) => {
+      console.log(this.companyId)
+      this.companyInfo = data;
+    },
+    (error) => {
+      console.error('Error fetching company info:', error);
+    }
+  );
+}
 
+
+updateCompanyInfo(companyId:number,companyInfo:string) {
+  const payload={
+    "text": companyInfo
+  }
+  this.authservice.updateCompany(companyId, payload).subscribe(
+
+    (data) => {
+      debugger
+      console.log('question updated successfully:', data);
+      // this.activeModal.close('question updated');
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    },
+    (error) => {
+      console.error('Error updating question ', error);
+    }
+  );
+}
 }
 

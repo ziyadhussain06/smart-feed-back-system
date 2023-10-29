@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'signin', component : SigninComponent },
   {path: 'signup', component : SignupComponent },
   {path: 'AdminDashboard', component : AdminDashboardComponent },
-  {path: 'BranchDashboard', component : CompanyDashboardComponent },
+  {path: 'BranchDashboard/:branchId', component : CompanyDashboardComponent },
   {path: 'CompanyDashboard', component : BranchDashboardComponent },
   {path: 'Companies', component : CompaniesComponent },
   {path: 'Branches', component : CompanybranchComponent },

@@ -69,7 +69,7 @@
             <td
                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-6 hidden md:table-cell">
                 <div class="space-x-4 flex">
-                    <img (click)="openModaal()" (click)="viewforms(company.id)" class="eye"
+                    <img (click)="openModaal()" (click)="loadcompanyInfo(company.id)" class="eye"
                         src="../../../assets/images/eye.svg" />
                     <img src="../../../assets/images/x.svg" class="cursor-pointer"
                         (click)="deleteCompany(company.id)" />
@@ -88,8 +88,8 @@
         <div class="absolute inset-0 overflow-hidden">
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
                 <div class="pointer-events-auto w-screen max-w-3xl ">
-                    <div class="flex h-full flex-col overflow-y-scroll bg-white md:py-0  md:px-14 shadow-xl "
-                        >
+                    <div class="flex h-full flex-col overflow-y-scroll bg-white md:py-0  md:px-14 shadow-xl ">
+                        <form>
                         <div class="md:py-8 md:px-0 px-4 py-4  md:shadow-none shadow-[0_0_16px_0_rgba(38,38,38,0.08)] ;">
                             <div class="flex items-start justify-between">
                                 <div class="flex ">
@@ -119,8 +119,8 @@
                             <div class="md:border-[1px] md:border-[#ECEEF2] rounded-xl md:py-6 md:px-8">
                                 <h2 class="md:text-xl text-base  my-auto  font-semibold leading-6 text-gray-900" id="slide-over-title">Company Detail</h2>
                                 <div class="border-b-[0.5px]  col-span-full  md:block hidden pb-4"></div>
-                                <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6" *ngIf="companylist">
-                                    <div class="sm:col-span-full">
+                                <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6" >
+                                    <!-- <div class="sm:col-span-full">
                                         <label for="first-name"
                                             class="block text-sm font-medium leading-6 text-gray-900">Company
                                             Id</label>
@@ -132,10 +132,10 @@
 
                                             <input type="text" name="first-name" id="first-name"
                                                 autocomplete="given-name"
-                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                [(ngModel)]="companylist.id" [disabled]="true">
+                                                class="disabled lock w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" [(ngModel)]="companyInfo.id"
+                                               >
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="sm:col-span-full">
                                         <label for="first-name"
                                             class="block text-sm font-medium leading-6 text-gray-900">Company
@@ -144,8 +144,7 @@
                                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
                                             <input type="text" name="first-name" id="first-name"
                                                 autocomplete="given-name"
-                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                [(ngModel)]="companylist.name" [disabled]="true">
+                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" [(ngModel)]="companyInfo.name">
                                         </div>
                                     </div>
 
@@ -158,20 +157,22 @@
                                             </div>
                                             <input type="text" name="last-name" id="last-name"
                                                 autocomplete="family-name"
-                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                [(ngModel)]="companylist.description" [disabled]="true">
+                                                class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" [(ngModel)]="companyInfo.description"
+                                                 >
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="md:mt-0 mt-2 flex justify-end">
+                        <div class="md:mt-0 mt-2 flex justify-end">
                         <button (click)="closeModaal()"
                             class="text-sm border bg-[transparent] text-gray-900 md:px-4 md:py-2.5  px-4 py-2.5 rounded-lg font-semibold">Cancel</button>
-                        <button
+                        <button (click)="updatecompanyInfo(companyInfo.id,companyInfo.description)"
                             class="text-sm bg-[#28BF5B] text-white ml-2 px-4 py-2.5  rounded-lg font-semibold">Submit
                         </button>
-                    </div> -->
+                    
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>

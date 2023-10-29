@@ -29,7 +29,9 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { NgChartsModule } from 'ng2-charts';
+import { QuestionmodalComponent } from './components/Company/questionmodal/questionmodal.component';
 
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { NgChartsModule } from 'ng2-charts';
     BranchnavbarComponent,
     StarRatingComponent,
     QuestionListComponent,
+    QuestionmodalComponent,
     
     
    
@@ -70,7 +73,8 @@ import { NgChartsModule } from 'ng2-charts';
     HttpClientModule,
     CompanyModule,
     ReactiveFormsModule,
-    NgChartsModule
+    NgChartsModule,
+    QRCodeModule
     
     
   ],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 @Component({
@@ -8,7 +8,10 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class ReviewsBranchComponent implements OnInit {
   @ViewChild('modaaal') modaaal!: ElementRef;
-
+  selectedreviewId!: number;
+  @Input() 
+  reviewId: any;
+  reviewInfo: any = {};
   openModaaal() {
     const modalElement = this.modaaal.nativeElement;
     modalElement.classList.add('show', 'd-block');
@@ -19,7 +22,9 @@ export class ReviewsBranchComponent implements OnInit {
     modalElement.classList.remove('show', 'd-block');
   }
   branchreview: any[] | undefined;
-  constructor(private authservice: AuthService) {}
+  constructor(private authservice: AuthService) {
+    this.selectedreviewId = 0;
+  }
   branchId!:any;
   companyId!:any;
 
@@ -65,22 +70,35 @@ deletereview(CompanyId: number) {
   }
 
 
-  companylist: any;
-  //get company on form
-  reviewview(companyId: string){
-    const companyID = localStorage.getItem('companyId');
-    if(companyID){
-    this.authservice.getreviewview(companyId)
-    .subscribe(
-      (data:any) => {
+  // branchlist: any;
+  // //get company on form
+  // reviewview(branchId: string){
+  //   const companyID = localStorage.getItem('branchId');
+    
+  //   this.authservice.getreviewview(branchId)
+  //   .subscribe(
+  //     (data:any) => {
 
-        this.companylist=data; 
-        console.log(this.companylist)
+  //       this.branchlist=data; 
+  //       console.log(this.branchlist)
         
-      },
-      error => {
-        console.error('Error fetching brancheslist:', error);
-      }
-    );
-}}
+  //     },
+  //     error => {
+  //       console.error('Error fetching brancheslist:', error);
+  //     }
+  //   );
+loadreviewInfo(reviewInfo:number) {
+  this.authservice.getreview(reviewInfo).subscribe(
+    (data) => {
+      // console.log(this.reviewInfo)
+      
+      this.reviewInfo = data;
+      console.log(this.reviewInfo)
+    },
+    (error) => {
+      console.error('Error fetching branch info:', error);
+    }
+  );
 }
+}
+

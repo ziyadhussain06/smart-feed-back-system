@@ -36,6 +36,7 @@ export class NewCompanyModalComponent {
     this.http.post('http://109.123.241.127:3000/user/register', this.formData).subscribe(
       (response:any) => {
         this.formsubmited1 = true;
+
         console.log('company admin successful', response);
         
         if(response.user){
@@ -49,6 +50,7 @@ export class NewCompanyModalComponent {
         
       },
       (error) => {
+        alert(error.error.message);
         console.error('Error occurred', error);
       }
     );

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
 @Component({
@@ -6,8 +6,9 @@ import { AuthService } from '../../../auth.service';
   templateUrl: './branchnavbar.component.html',
   styleUrls: ['./branchnavbar.component.css']
 })
-export class BranchnavbarComponent {
+export class BranchnavbarComponent implements OnInit{
   [x: string]: any;
+  @ViewChild('modal') modal!: ElementRef;
   // currentUser: any;
   constructor(private authService: AuthService, private router: Router) {}
   logout() {
@@ -19,5 +20,19 @@ export class BranchnavbarComponent {
   ngOnInit() {
     this.username = localStorage.getItem('username');
   }
-  
+  openModaal(): void {
+    const modalElement = this.modal.nativeElement;
+    modalElement.classList.add('show', 'd-block');
+  }
+
+  closeModaal() {
+    const modalElement = this.modal.nativeElement;
+    modalElement.classList.remove('show', 'd-block');
+  }
+
+  branchId: string = 'branch1'; // Replace with actual branch ID
+
+  get qrCodeData(): string {
+    return `http://localhost:4200/BranchDashboard/${this.branchId}`;
+  }
 }

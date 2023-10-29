@@ -50,6 +50,7 @@ export class NewBranchmodalComponent implements OnInit {
         this.myForm.resetForm()
       },
       (error) => {
+        alert(error.error.message);
         console.error('Error occurred', error);
       }
     );

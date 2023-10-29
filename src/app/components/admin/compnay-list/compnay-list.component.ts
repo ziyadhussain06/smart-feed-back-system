@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { AuthService} from 'src/app/auth.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -10,7 +10,10 @@ import { ModalService } from 'src/app/modal.service';
 })
 export class CompnayListComponent {
   @ViewChild('modaal') modaal!: ElementRef;
- 
+  selectedcompanyId!: number;
+  @Input() 
+  companyIds: any;
+  companyInfo: any = {};
   openModaal() {
     const modalElement = this.modaal.nativeElement;
     modalElement.classList.add('show', 'd-block');
@@ -29,6 +32,7 @@ export class CompnayListComponent {
       data => {
         this.companies = data;
         console.log(this.companies)
+
       },
       // error => {
       //   console.error('Error fetching companies:', error);
@@ -59,27 +63,6 @@ export class CompnayListComponent {
         }
       );
   }
-  
-  companylist: any;
-  //get company on form
-  viewforms(companyId: string) {
-    
-    this.authservice.getCompanyview(companyId)
-    .subscribe(
-      (data:any) => {
-        console.log(this.companyId)
-        this.companylist=data; 
-        console.log(this.companylist)
-        
-        
-      },
-      error => {
-        console.error('Error fetching brancheslist:', error);
-      }
-    );
-}
-
-
   @ViewChild('table')
   table!: ElementRef;
 
@@ -103,6 +86,36 @@ closeModal() {
 }
 isModalOpen() {
   return this.modalService.getIsOpen();
+}
+
+loadcompanyInfo(companyInfo:number) {
+  this.authservice.getallcompany(companyInfo).subscribe(
+    (data) => {
+      console.log(this.companyId)
+      this.companyInfo = data;
+    },
+    (error) => {
+      console.error('Error fetching company info:', error);
+    }
+  );
+}
+
+
+updatecompanyInfo(companyId:number,companyInfo:any) {
+  this.authservice.updateallcompany(companyId, this.companyInfo).subscribe(
+
+    (data) => {
+      debugger
+      console.log('question updated successfully:', data);
+      setTimeout(() => {
+            window.location.reload();
+          }, 500);
+      // this.activeModal.close('question updated');
+    },
+    (error) => {
+      console.error('Error updating question ', error);
+    }
+  );
 }
 
 

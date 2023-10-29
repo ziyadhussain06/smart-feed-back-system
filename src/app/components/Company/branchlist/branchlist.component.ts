@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -10,6 +10,10 @@ import { ModalService } from 'src/app/modal.service';
 })
 export class BranchlistComponent {
   @ViewChild('modaal') modaal!: ElementRef;
+  selectedbranchId!: number;
+  @Input() 
+  branchIds: any;
+  branchInfo: any = {};
 
   openModaal() {
     const modalElement = this.modaal.nativeElement;
@@ -22,7 +26,9 @@ export class BranchlistComponent {
   }
   brancheslist: any[] | undefined;
 
-  constructor(private authservice: AuthService,private modalService: ModalService) {}
+  constructor(private authservice: AuthService,private modalService: ModalService) {
+    this.selectedbranchId = 0;
+  }
   adminId!:string;
   companyId!:any ;
 
@@ -67,24 +73,24 @@ deletebranch(branchId: number) {
       );
   }
 
-  companylist: any;
-  //get company on form
-  branchview(companyId: string){
-    const companyID = localStorage.getItem('companyId');
-    if(companyID){
-    this.authservice.getbranchview(companyId)
-    .subscribe(
-      (data:any) => {
+//   companylist: any;
+//   //get company on form
+//   branchview(companyId: string){
+//     const companyID = localStorage.getItem('companyId');
+//     if(companyID){
+//     this.authservice.getbranchview(companyId)
+//     .subscribe(
+//       (data:any) => {
 
-        this.companylist=data; 
-        console.log(this.companylist)
+//         this.companylist=data; 
+//         console.log(this.companylist)
         
-      },
-      error => {
-        console.error('Error fetching brancheslist:', error);
-      }
-    );
-}}
+//       },
+//       error => {
+//         console.error('Error fetching brancheslist:', error);
+//       }
+//     );
+// }}
 
 
 @ViewChild('table')
@@ -109,5 +115,38 @@ closeModal() {
 }
 isModalOpen() {
   return this.modalService.getIsOpen();
+}
+
+
+
+
+loadbranchInfo(branchInfo:number) {
+  this.authservice.getbranch(branchInfo).subscribe(
+    (data) => {
+      console.log(this.branchId)
+      this.branchInfo = data;
+    },
+    (error) => {
+      console.error('Error fetching branch info:', error);
+    }
+  );
+}
+
+
+updatebranchInfo(branchId:number,branchInfo:any) {
+  this.authservice.updatebranch(branchId, this.branchInfo).subscribe(
+
+    (data) => {
+      debugger
+      console.log('question updated successfully:', data);
+      // this.activeModal.close('question updated');
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    },
+    (error) => {
+      console.error('Error updating question ', error);
+    }
+  );
 }
 }
