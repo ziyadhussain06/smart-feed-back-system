@@ -30,8 +30,8 @@ export class BranchnavbarComponent implements OnInit{
     modalElement.classList.remove('show', 'd-block');
   }
 
-  branchId: string = 'branch1'; // Replace with actual branch ID
-
+  branchId: any = localStorage.getItem('branchId'); // Replace with actual branch ID
+  
   get qrCodeData(): string {
     return `http://localhost:4200/BranchDashboard/${this.branchId}`;
   }

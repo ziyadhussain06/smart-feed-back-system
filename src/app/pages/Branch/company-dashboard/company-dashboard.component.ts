@@ -32,6 +32,7 @@ export class CompanyDashboardComponent {
   ngOnInit() : void {
     this.route.params.subscribe(params => {
       this.branchId = params['branchId'];
+      localStorage.setItem('branchId',this.branchId);
       this.http.get('http://109.123.241.127:3000/branch/'+this.branchId).subscribe((data:any)=>{
         this.companyId = data.company.id;
         if (this.companyId) {
@@ -96,6 +97,6 @@ export class CompanyDashboardComponent {
 
   handleQRCodeScan(branchId: string) {
   
-  this.router.navigate(['BranchDashboard', this.branchId]);
+  this.router.navigate(['BranchDashboard',this.branchId]);
 }
 }
