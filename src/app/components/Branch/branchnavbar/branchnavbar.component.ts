@@ -8,7 +8,9 @@ import { AuthService } from '../../../auth.service';
 })
 export class BranchnavbarComponent implements OnInit{
   [x: string]: any;
-  @ViewChild('modal') modal!: ElementRef;
+  @ViewChild('modaal') modaal!: ElementRef;
+  @ViewChild('modaaal') modaaal!: ElementRef;
+  
   // currentUser: any;
   constructor(private authService: AuthService, private router: Router) {}
   logout() {
@@ -21,14 +23,24 @@ export class BranchnavbarComponent implements OnInit{
     this.username = localStorage.getItem('username');
   }
   openModaal(): void {
-    const modalElement = this.modal.nativeElement;
+    const modalElement = this.modaal.nativeElement;
     modalElement.classList.add('show', 'd-block');
   }
 
   closeModaal() {
-    const modalElement = this.modal.nativeElement;
+    const modalElement = this.modaal.nativeElement;
     modalElement.classList.remove('show', 'd-block');
   }
+  openModaaal(): void {
+    const modalElement = this.modaaal.nativeElement;
+    modalElement.classList.add('show', 'd-block');
+  }
+
+  closeModaaal() {
+    const modalElement = this.modaaal.nativeElement;
+    modalElement.classList.remove('show', 'd-block');
+  }
+
 
   branchId: any = localStorage.getItem('branchId'); // Replace with actual branch ID
   
