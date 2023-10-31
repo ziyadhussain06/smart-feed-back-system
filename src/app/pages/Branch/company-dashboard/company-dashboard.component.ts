@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
 import { ModalService } from 'src/app/modal.service';
 import { HttpClient } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
+import { AbstractControl, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-company-dashboard',
   templateUrl: './company-dashboard.component.html',
@@ -15,18 +16,29 @@ export class CompanyDashboardComponent {
   @ViewChild('myForm')
   myForm!: NgForm;
   branchId!: string;
-  constructor(private toggleService: ToggleService, private authService: AuthService, private router: Router, private modalService: ModalService, private http: HttpClient,private route: ActivatedRoute) {
+   myForm1: FormGroup;
 
+  constructor(private toggleService: ToggleService, private authService: AuthService, private router: Router, private modalService: ModalService, private http: HttpClient,private route: ActivatedRoute,
+    private formBuilder: FormBuilder) {
+    this.myForm1 = this.formBuilder.group({
+      fullname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      number: ['', [Validators.required]],
+      city: ['', Validators.required],
+      review: ['', [Validators.required, this.customValidator, Validators.min(1), Validators.max(5)]]
+    });
   }
-
+  customValidator(control: AbstractControl): { [key: string]: any } | null {
+    const value = control.value;
+    if (value && (isNaN(value) || value < 1 || value > 5)) {
+      return { 'invalidRange': true };
+    }
+    return null;
+  }
+  
   toggleSidebar() {
     this.toggleService.toggleSidebar();
   }
-
-  // signOut() {
-  //   this.authService.logout();
-  //   this.router.navigate(['/']);
-  // }
   questionList: any[] | undefined;
   companyId!:any;
   ngOnInit() : void {
@@ -40,6 +52,7 @@ export class CompanyDashboardComponent {
             data => {
               if (data) {
                 this.questionList = data;
+                
                 console.log(this.questionList)
               }
             },
@@ -63,8 +76,11 @@ export class CompanyDashboardComponent {
     phone: '',
     branchId: '',
   }
-
+  
+ 
   submitReview() {
+    this.myForm1.markAllAsTouched();
+    if (this.myForm1.valid) {
     let payload: any = {
       ratings: [],
       fullName: this.formData['fullName'],
@@ -76,7 +92,6 @@ export class CompanyDashboardComponent {
 
     if (this.branchId) {
       console.log(this.questionList)
-      debugger
       if (this.questionList) {
         this.questionList.map(q => {
           payload.ratings.push({ questionId: q.id, rating: Number(q.rating) })
@@ -94,6 +109,10 @@ export class CompanyDashboardComponent {
       )
     }
   }
+  else {
+    alert("Please fill out all required fields correctly.");
+}
+}
 
   handleQRCodeScan(branchId: string) {
   
